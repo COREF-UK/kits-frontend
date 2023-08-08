@@ -2,6 +2,7 @@ import "./globals.css";
 import { Exo_2 } from "next/font/google";
 
 import Link from "next/link";
+import Image from "next/image";
 
 const exo2 = Exo_2({ subsets: ["latin"] });
 
@@ -23,9 +24,25 @@ export default function RootLayout({
           href={getStrapiMedia(global.attributes.favicon)}
         /> */}
       </head>
-      <body className={exo2.className + ' min-h-screen'}>
-        <nav className="flex flex-row justify-between items-center p-4 bg-black">
-          <Link href="/">Logo (WIP)</Link>
+      <body className={exo2.className + " min-h-screen"}>
+        <nav className="sticky top-0 flex flex-row justify-between items-center p-4 z-30 backdrop-blur-md">
+          <Link className="flex flex-row justify-center items-center" href="/">
+            <Image
+              className="h-fit"
+              src="/coref-o.svg"
+              width="54"
+              height="54"
+              alt="COREF"
+            ></Image>
+            <div className="h-[40px] w-[1px] bg-white ml-2 mr-4"></div>
+            <Image
+              className="h-fit"
+              src="/kits-logo.svg"
+              width="96"
+              height="54"
+              alt="COREF"
+            ></Image>
+          </Link>
           <ul className="flex flex-row gap-3">
             <li>Home</li>
             <li>Themes</li>

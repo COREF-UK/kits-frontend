@@ -1,32 +1,30 @@
 import Image from "next/image";
+import Button from "../_components/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="w-full text-center h-full">
-      <h1>COREF Kits</h1>
-      <div className="h-40 relative flex flex-row justify-center items-center">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 flex flex-col justify-center items-center gap-10">
         <Image
-          className="h-full"
-          src="/coref-simple-logo.svg"
-          width="218"
-          height="87"
-          alt="COREF"
-        ></Image>
-        <Image
-          className="h-full"
-          src="/kits-logo.svg"
-          width="1920"
+          className="w-3/4"
+          src="/coref-kits-logo.svg"
+          width="2706"
           height="1080"
           alt="COREF"
         ></Image>
-        <Image
-          className="h-full"
-          src="/Mediamodifier-Design.svg"
-          width="1920"
-          height="1080"
-          alt="COREF"
-        ></Image>
+        <Link href="/themes">
+        <Button title="EXPLORE"></Button>
+        </Link>
       </div>
+
+      <Image
+        className="fixed h-screen w-screen top-0 left-0 -z-30 background-image"
+        src="/home-background.svg"
+        height="1000"
+        width="1000"
+        alt="background"
+      ></Image>
     </div>
   );
 }

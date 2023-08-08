@@ -1,0 +1,23 @@
+<svg class="fixed top-0 left-1/2 -translate-x-1/2 h-screen -z-10 mx-auto" viewBox="0 0 1254 1196"
+    fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_1_2)" filter="url(#filter0_f_1_2)">
+        <path
+            d="M1054 535.5C1054 615.402 1033.23 693.93 993.738 763.365C954.243 832.8 897.381 890.752 828.741 931.527C760.1 972.302 682.042 994.495 602.239 995.926C522.436 997.357 443.635 977.977 373.579 939.689L594 535.5H1054Z"
+            fill="#fff" fill-opacity="0.7"></path>
+        <path
+            d="M1007.9 270.64C910.443 215.747 798.375 192.394 687.105 203.792C575.835 215.189 470.829 260.777 386.525 334.286C302.22 407.796 242.759 505.617 216.317 614.299C189.875 722.981 197.751 837.185 238.862 941.208L742.26 742.26L1007.9 270.64Z"
+            fill="#0eb7d9" fill-opacity="0.7"></path>
+    </g>
+    <defs>
+        <filter id="filter0_f_1_2" x="0" y="0" width="1442" height="1442"
+            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+            <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_1_2"></feGaussianBlur>
+            <feTurbulence result="NOISE" type="fractalNoise" baseFrequency="0.1" numOctaves="6"
+                stitchTiles="stitch"></feTurbulence>
+            <feDisplacementMap in="effect1_foregroundBlur_1_2" in2="NOISE" scale="20"
+                xChannelSelector="R" yChannelSelector="R"></feDisplacementMap>
+        </filter>
+    </defs>
+</svg>
