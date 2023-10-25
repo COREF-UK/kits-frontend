@@ -5,9 +5,9 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="w-full text-center h-full">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 flex flex-col justify-center items-center gap-10">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4/5 flex flex-col justify-center items-center gap-10 mt-10">
         <Image
-          className="w-3/4"
+          className="w-1/2"
           src="/coref-kits-logo.svg"
           width="2706"
           height="1080"
