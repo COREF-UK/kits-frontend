@@ -38,14 +38,9 @@ interface ITechnologyData {
   Future: ITechnologyEntity[];
 }
 
+type IMaturityLevel = "Basic" | "Advanced" | "World-Class" | "Future";
+
 function Cell(title: string, entityType: string, link: string) {
-  const colors = {
-    hardwares: "#192C3B",
-    softwares: "#29475F",
-    infrastructures: "#3E6B8E",
-    skills: "#5B8EB7",
-    yellow: "#E5E92A",
-  };
 
   if (entityType === "yellow") {
     return (
@@ -115,8 +110,8 @@ export default function Technology({ params }: { params: { slug: string } }) {
         ["hardwares", "softwares", "infrastructures", "skills"].forEach((entityType) => {
           maturityLevelResponse.data.attributes[entityType].data.forEach(
             (entity: any) => {
-              technologyData[maturityLevel.attributes.level].push({
-                type: entityType,
+              technologyData[maturityLevel.attributes.level as IMaturityLevel].push({
+                type: EntityType[entityType as keyof typeof EntityType],
                 entity: entity,
               });
             }
@@ -142,7 +137,7 @@ export default function Technology({ params }: { params: { slug: string } }) {
   return (
     <main>
       {isLoading && <h1>Loading</h1>}
-      {!isLoading && (
+      {!isLoading && data && (
         <div>
           <header className="w-full grid grid-cols-4 text-xl text-center font-bold mb-6 pl-[4.5rem] sticky top-32">
             {["hardware", "software", "infrastructure", "skills"].map(
@@ -173,7 +168,7 @@ export default function Technology({ params }: { params: { slug: string } }) {
                       {["hardwares", "softwares", "infrastructures", "skills"].map(
                         (entityType) => (
                           <div className="flex flex-col h-full">
-                            {data[level]
+                            {data[level as IMaturityLevel]
                               .filter((el: any) => el.type === entityType)
                               .filter(
                                 (el: any) =>
@@ -196,7 +191,7 @@ export default function Technology({ params }: { params: { slug: string } }) {
                       {["hardwares", "softwares", "infrastructures", "skills"].map(
                         (entityType) => (
                           <div className="flex flex-col h-full">
-                            {data[level]
+                            {data[level as IMaturityLevel]
                               .filter((el: any) => el.type === entityType)
                               .filter(
                                 (el: any) =>
