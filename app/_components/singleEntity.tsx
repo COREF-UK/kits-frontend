@@ -108,11 +108,13 @@ export default function SingleEntity({
               </h2>
               <div className="overflow-x-scroll overflow-y-hidden whitespace-nowrap -mx-4 md:-mx-8 py-4 pl-4 md:pl-8 invisible-scrollbar">
                 {data.attributes[relation].data.map((relationItem: any) => (
-                  <div className="inline-block max-w-[80vw] w-[400px] mr-4">
+                  <div
+                    className="inline-block max-w-[80vw] w-[400px] mr-4"
+                    key={relationItem.id}
+                  >
                     <ListItem
                       title={relationItem.attributes.name}
                       link={`/${relation}/${relationItem.id}`}
-                      key={relationItem.id}
                     ></ListItem>
                   </div>
                 ))}
