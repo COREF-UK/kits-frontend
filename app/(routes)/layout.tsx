@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Background } from "../_components/background";
-import { Head } from "next/document";
+import  Head  from "next/head";
 
 const exo2 = Exo_2({ subsets: ["latin"] });
 

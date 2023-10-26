@@ -26,11 +26,11 @@ const nextConfig = {
     },
   // images: {
   //   loader: "default",
-  //   domains: ["localhost"],
+  //   domains: ["kits-strapi.thalescoref.co.uk"],
   //   remotePatterns: [
   //     {
   //       protocol: "http",
-  //       hostname: "127.0.0.1",
+  //       hostname: "kits-strapi.thalescoref.co.uk",
   //       port: "1337",
   //       pathname: "/uploads/**",
   //     },
