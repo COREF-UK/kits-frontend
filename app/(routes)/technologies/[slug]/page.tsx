@@ -4,6 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
+export const runtime = 'edge';
+
+
 interface Meta {
   pagination: {
     start: number;
