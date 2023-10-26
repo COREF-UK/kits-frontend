@@ -7,7 +7,7 @@ import qs from "qs";
  */
 export function getStrapiURL(path = ""): string {
   return `${
-    process.env.NODE_ENV == 'production' ? process.env.NEXT_PUBLIC_STRAPI_API_URL : "http://127.0.0.1:1337"
+    process.env.NODE_ENV == 'production' ? process.env.NEXT_PUBLIC_STRAPI_API_URL : "http://kits-strapi.thalescoref.co.uk:1337"
   }${path}`;
 }
 

@@ -25,6 +25,19 @@
   text-orientation: mixed;
 }
 
+.hardware-cell {
+  background-color: #192C3B;
+}
+.software-cell {
+  background-color: #29475F;
+}
+.infrastructure-cell {
+  background-color: #3E6B8E;
+}
+.skill-cell {
+  background-color: #5B8EB7;
+}
+
 @keyframes pulse {
   0%, 100% {
     transform: scale(1);

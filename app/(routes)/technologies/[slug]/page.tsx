@@ -62,10 +62,12 @@ function Cell(title: string, entityType: string, link: string) {
     );
   }
 
+  const colorClass: string = entityType.slice(0, -1) + '-cell'
+
   return (
     <Link href={link}>
       <div
-        className={`w-full text-center text-xs font-extralight rounded-lg px-3 py-2 my-2 bg-[${colors[entityType]}]`}
+        className={`w-full text-center text-xs font-extralight rounded-lg px-3 py-2 my-2 ${colorClass}`}
       >
         {title}
       </div>
