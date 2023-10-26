@@ -102,7 +102,7 @@ export default function SingleEntity({
           </section>
 
           {displayRelations.map((relation) => (
-            <section className="mt-8">
+            <section className="mt-8" key={relation}>
               <h2 className="text-xl font-bold">
                 {relation.charAt(0).toUpperCase() + relation.slice(1)}
               </h2>
@@ -112,6 +112,7 @@ export default function SingleEntity({
                     <ListItem
                       title={relationItem.attributes.name}
                       link={`/${relation}/${relationItem.id}`}
+                      key={relationItem.id}
                     ></ListItem>
                   </div>
                 ))}
