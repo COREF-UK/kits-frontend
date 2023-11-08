@@ -32,6 +32,9 @@ export async function fetchAPI<T>(
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`
     },
+    next: {
+      revalidate: process.env.NODE_ENV === 'production' ? 3600 : 1
+    },
     ...options,
   };
 

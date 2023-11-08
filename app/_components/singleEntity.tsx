@@ -1,5 +1,3 @@
-"use client";
-import { useState, useEffect, useCallback } from "react";
 import { fetchAPI } from "@/app/_lib/api";
 import Image from "next/image";
 import { getStrapiMedia } from "@/app/_lib/media";

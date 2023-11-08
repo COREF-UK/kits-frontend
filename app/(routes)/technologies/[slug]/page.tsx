@@ -78,7 +78,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   if (data === undefined) return <h1>Error Retrieving Technology</h1>;
   return (
     <main>
-      <header className="w-full grid grid-cols-4 text-xl text-center font-bold mb-6 pl-[4.5rem] sticky top-32">
+      <header className="w-full grid grid-cols-4 text-xl text-center font-bold mb-6 pl-[4.5rem] sticky top-6">
         {["hardware", "software", "infrastructure", "skills"].map((heading) => (
           <div
             className="flex flex-row justify-center items-center gap-3"
