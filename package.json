@@ -18,6 +18,7 @@
     "clsx": "^1.2.1",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
+    "framer-motion": "^10.16.4",
     "geopattern": "^1.2.3",
     "lucide-react": "^0.256.0",
     "moment": "^2.29.4",

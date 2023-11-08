@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  compiler: {
+    styledComponents: true
+  },
   reactStrictMode: true,
   //   /**
   //  * Enable static exports for the App Router.
@@ -21,21 +24,18 @@ const nextConfig = {
      *
      * @see https://nextjs.org/docs/pages/api-reference/components/image#unoptimized
      */
-    images: {
-      unoptimized: true,
-    },
-  // images: {
-  //   loader: "default",
-  //   domains: ["kits-strapi.thalescoref.co.uk"],
-  //   remotePatterns: [
-  //     {
-  //       protocol: "http",
-  //       hostname: "kits-strapi.thalescoref.co.uk",
-  //       port: "1337",
-  //       pathname: "/uploads/**",
-  //     },
-  //   ],
-  // },
+  images: {
+    loader: "default",
+    domains: ["kits-strapi.thalescoref.co.uk"],
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "kits-strapi.thalescoref.co.uk",
+        port: "80",
+        pathname: "/uploads/**",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

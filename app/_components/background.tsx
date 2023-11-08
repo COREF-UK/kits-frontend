@@ -1,7 +1,9 @@
+'use client';
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export function Background() {
+export default function Background() {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
