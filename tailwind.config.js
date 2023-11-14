@@ -19,6 +19,9 @@ module.exports = {
       colors: {
         background: "#000",
       },
+      gridTemplateColumns: {
+        "theme": "1fr auto"
+      },
       keyframes: {
         "accordion-down": {
           from: { height: 0 },

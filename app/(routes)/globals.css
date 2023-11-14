@@ -17,7 +17,12 @@
 }
 
 .invisible-scrollbar::-webkit-scrollbar {
-  opacity: 0;
+  display: none;
+}
+
+.invisible-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .vertical-text {

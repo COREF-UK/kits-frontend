@@ -60,7 +60,7 @@ export default async function SingleEntity({
           </div>
 
           <Image
-            className="w-full rounded-l-lg max-w-3xl aspect-video object-cover lg:-mr-8"
+            className="w-full lg:max-w-xl rounded-lg lg:rounded-l-lg max-w-3xl aspect-video object-cover lg:-mr-8"
             src={
               getStrapiMedia(data.attributes.cover_image) ??
               pattern.toDataUrl().substring(5, pattern.toDataUrl().length - 2)
