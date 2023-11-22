@@ -1,10 +1,11 @@
-import ImplementationMatrix, {
+import ImplementationMatrix from "@/app/_components/implementationMatrix";
+import { fetchAPI } from "@/app/_lib/api";
+import {
   EntityType,
   IEntityType,
   IMaturityLevel,
   ITechnologyData,
-} from "@/app/_components/implementationMatrix";
-import { fetchAPI } from "@/app/_lib/api";
+} from "@/app/_lib/types";
 
 export const runtime = "edge";
 

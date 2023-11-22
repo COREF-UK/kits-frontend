@@ -1,46 +1,18 @@
 "use client";
 
+
 import Image from "next/image";
 import Link from "next/link";
-
 import { useEffect, useState } from "react";
 import { Variants, motion } from "framer-motion";
-
-export const EntityType = [
-  "hardwares",
-  "softwares",
-  "infrastructures",
-  "skills",
-] as const;
-export type IEntityType = (typeof EntityType)[number];
-
-export const MaturityLevels = [
-  "Basic",
-  "Advanced",
-  "World-Class",
-  "Future",
-] as const;
-export type IMaturityLevel = (typeof MaturityLevels)[number];
-
-export interface ITechnologyEntity {
-  entity: any;
-  type: IEntityType;
-}
-
-export interface ITechnologyData {
-  title: string;
-  description: string;
-  Basic: ITechnologyEntity[];
-  Advanced: ITechnologyEntity[];
-  "World-Class": ITechnologyEntity[];
-  Future: ITechnologyEntity[];
-}
-
-interface ICellIdentifier {
-  id: number;
-  entityType: IEntityType;
-  maturityLevel: IMaturityLevel;
-}
+import {
+  EntityType,
+  ICellIdentifier,
+  IEntityType,
+  IMaturityLevel,
+  ITechnologyData,
+  MaturityLevels,
+} from "../_lib/types";
 
 const maturityVariants: Variants = {
   true: {
@@ -72,34 +44,34 @@ export default function ImplementationMatrix({
   const returnCellsUnder = (
     levelToSearch: IMaturityLevel,
     entityType: IEntityType
-    ): ICellIdentifier[] => {
-      const filteredCells = technologyData[levelToSearch].filter(
+  ): ICellIdentifier[] => {
+    const filteredCells = technologyData[levelToSearch].filter(
       (cell) => cell.type == entityType
     );
-    
+
     let cells = filteredCells.map((cell) => ({
       id: cell.entity.id,
       entityType: cell.type,
       maturityLevel: levelToSearch,
     }));
-    
+
     if (
       filteredCells.some(
         (cell) => cell.entity.attributes.name === "Everything Below"
-        )
-        ) {
+      )
+    ) {
       if (levelToSearch !== "Basic") {
         const newLevel =
-        MaturityLevels[MaturityLevels.indexOf(levelToSearch) - 1];
+          MaturityLevels[MaturityLevels.indexOf(levelToSearch) - 1];
         cells = [...cells, ...returnCellsUnder(newLevel, entityType)];
       }
     }
     return cells;
   };
-  
+
   const highlightMaturity = (maturity: IMaturityLevel) => {
     if (fixedMaturity) maturity = fixedMaturity;
-    
+
     let newCells: ICellIdentifier[] = [];
     EntityType.forEach((entity) => {
       newCells = [...newCells, ...returnCellsUnder(maturity, entity)];
@@ -112,14 +84,14 @@ export default function ImplementationMatrix({
       ? setCellsToHighlight(null)
       : highlightMaturity(fixedMaturity);
   }, [fixedMaturity]);
-  
+
   return (
     <div className="mt-10">
       <header className="w-full grid grid-cols-4 text-xl text-center font-bold mb-6 pl-[4.5rem] sticky top-6">
         {EntityType.map((heading) => (
           <div
-          className="flex flex-row justify-center items-center gap-3 text-shadow shadow-black"
-          key={heading}
+            className="flex flex-row justify-center items-center gap-3 text-shadow shadow-black"
+            key={heading}
           >
             <Image
               className="h-4"
@@ -127,7 +99,7 @@ export default function ImplementationMatrix({
               alt=""
               width={20}
               height={20}
-              ></Image>
+            ></Image>
             {heading[0].toUpperCase() +
               heading.slice(1, -1) +
               (heading.includes("skills") ? "s" : "")}
@@ -296,6 +268,7 @@ function Cell({
       {entity.attributes.name}
       <motion.p
         animate={clicked ? "open" : "closed"}
+        initial='closed'
         variants={descriptionVariants}
         className="text-left text-gray-300"
       >
