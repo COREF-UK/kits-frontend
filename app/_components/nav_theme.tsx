@@ -12,7 +12,6 @@ const listVariants = {
     height: "0",
     transition: {
       when: "afterChildren",
-      staggerChildren: 0.1,
     },
   },
   visible: {
@@ -75,7 +74,7 @@ export default function NavTheme({
             animate={{
               scale: 1,
               opacity: 1,
-              width: isSideBarOpen ? "18rem" : "2.5rem",
+              width: isSideBarOpen ? "18.5rem" : "2.5rem",
             }}
             exit={{ scale: 0.5, opacity: 0 }}
             className="absolute top-3 left-3 h-10 rounded-lg bg-opacity-10 backdrop-blur-sm bg-blue-700 z-50"
@@ -91,7 +90,7 @@ export default function NavTheme({
           title={theme}
         >
           <div
-            style={{ width: isSideBarOpen ? "18rem" : "2.5rem" }}
+            style={{ width: isSideBarOpen ? "18.5rem" : "2.5rem" }}
             className="h-10"
           ></div>
         </Link>
@@ -109,74 +108,60 @@ export default function NavTheme({
         ></Image>
 
         {/* Themes + sub-technologies */}
-        <AnimatePresence>
-          {isSideBarOpen && (
-            <motion.div
-              className="whitespace-nowrap py-4 flex flex-row items-start justify-between w-full"
-              initial={{ x: -15, opacity: -1 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -15, opacity: -1 }}
-            >
-              <div className="flex flex-col justify-start items-start">
-                <div className="mt-1">
-                  {theme
-                    .replaceAll("_", " ")
-                    .replace(/\b\w/g, (match) => match.toUpperCase())}
-                </div>
-                <AnimatePresence>
-                  {isExpanded && isSideBarOpen && (
-                    <motion.ul
-                      variants={listVariants}
-                      initial="hidden"
-                      animate="visible"
-                      exit="hidden"
-                      className="mt-4"
+        <motion.div
+          className="whitespace-nowrap py-4 flex flex-row items-start justify-between w-full"
+          animate={isSideBarOpen ? { opacity: 1 } : { opacity: 0 }}
+        >
+          <div className="flex flex-col justify-start items-start">
+            <div className="mt-1">
+              {theme
+                .replaceAll("_", " ")
+                .replace(/\b\w/g, (match) => match.toUpperCase())}
+            </div>
+            <AnimatePresence>
+              {isExpanded && isSideBarOpen && (
+                <motion.ul
+                  variants={listVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                >
+                  {technologies.map((tech: any) => (
+                    <motion.li
+                      key={tech.id}
+                      variants={itemVariants}
+                      className="mt-2 text-gray-400 first:mt-6"
+                      style={
+                        pathname === `/technologies/${tech.id}`
+                          ? { color: "white" }
+                          : {}
+                      }
                     >
-                      {technologies.map((tech: any) => (
-                        <motion.li
-                          key={tech.id}
-                          variants={itemVariants}
-                          className="mt-2 text-gray-300"
-                          style={
-                            pathname === `/technologies/${tech.id}`
-                              ? { color: "white" }
-                              : {}
-                          }
-                        >
-                          <Link href={`/technologies/${tech.id}`}>
-                            {tech.name}
-                          </Link>
-                        </motion.li>
-                      ))}
-                    </motion.ul>
-                  )}
-                </AnimatePresence>
-              </div>
-              <motion.button
-                type="button"
-                initial={{ rotate: 90 }}
-                animate={isExpanded ? { rotate: 270 } : { rotate: 90 }}
-                onClick={() => {
-                  setExpanded(!isExpanded);
-                }}
-                className="z-50 mr-8 mt-1"
-              >
-                <Image
-                  className="w-full"
-                  src="/alt/chevron.svg"
-                  width="24"
-                  height="24"
-                  alt={isExpanded ? "Close" : "Open"}
-                ></Image>
-              </motion.button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* <AnimatePresence>
-          {isSideBarOpen && (
-          )}
-        </AnimatePresence> */}
+                      <Link href={`/technologies/${tech.id}`}>{tech.name}</Link>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </div>
+          <motion.button
+            type="button"
+            initial={{ rotate: 90 }}
+            animate={isExpanded ? { rotate: 270 } : { rotate: 90 }}
+            onClick={() => {
+              setExpanded(!isExpanded);
+            }}
+            className="z-50 mr-5 mt-1"
+          >
+            <Image
+              className="w-full"
+              src="/alt/chevron.svg"
+              width="24"
+              height="24"
+              alt={isExpanded ? "Close" : "Open"}
+            ></Image>
+          </motion.button>
+        </motion.div>
       </div>
     </div>
   );

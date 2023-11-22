@@ -53,3 +53,7 @@
     opacity: 0.7;
   }
 }
+
+.react-flow__handle-bottom, .react-flow__handle-top {
+  opacity: 0;
+}

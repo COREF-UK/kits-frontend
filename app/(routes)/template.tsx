@@ -16,11 +16,11 @@ const pageTransitionVariants = {
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
-      variants={pageTransitionVariants}
-      initial="entrance"
-      animate="default"
-      exit="exit"
-      transition={{ type: "linear" }}
+      // variants={pageTransitionVariants}
+      // initial="entrance"
+      // animate="default"
+      // exit="exit"
+      // transition={{ type: "linear" }}
     >
       {children}
     </motion.div>
