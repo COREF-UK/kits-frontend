@@ -1,39 +1,15 @@
-import ImplementationMatrix from "@/app/_components/implementationMatrix";
+import ImplementationMatrix, {
+  EntityType,
+  IEntityType,
+  IMaturityLevel,
+  ITechnologyData,
+} from "@/app/_components/implementationMatrix";
 import { fetchAPI } from "@/app/_lib/api";
 
 export const runtime = "edge";
 
 interface StrapiResponse {
   data: any;
-}
-
-export const EntityType = [
-  "hardwares",
-  "softwares",
-  "infrastructures",
-  "skills",
-] as const;
-export type IEntityType = (typeof EntityType)[number];
-export const MaturityLevels = [
-  "Basic",
-  "Advanced",
-  "World-Class",
-  "Future",
-] as const;
-export type IMaturityLevel = (typeof MaturityLevels)[number];
-
-export interface ITechnologyEntity {
-  entity: any;
-  type: IEntityType;
-}
-
-export interface ITechnologyData {
-  title: string;
-  description: string;
-  Basic: ITechnologyEntity[];
-  Advanced: ITechnologyEntity[];
-  "World-Class": ITechnologyEntity[];
-  Future: ITechnologyEntity[];
 }
 
 async function fetchData(slug: string) {
@@ -61,20 +37,18 @@ async function fetchData(slug: string) {
         urlParamsObject
       );
 
-      EntityType.forEach(
-        (entityType) => {
-          maturityLevelResponse.data.attributes[entityType].data.forEach(
-            (entity: any) => {
-              technologyData[
-                maturityLevel.attributes.level as IMaturityLevel
-              ].push({
-                type: entityType as IEntityType,
-                entity: entity,
-              });
-            }
-          );
-        }
-      );
+      EntityType.forEach((entityType: IEntityType) => {
+        maturityLevelResponse.data.attributes[entityType].data.forEach(
+          (entity: any) => {
+            technologyData[
+              maturityLevel.attributes.level as IMaturityLevel
+            ].push({
+              type: entityType,
+              entity: entity,
+            });
+          }
+        );
+      });
     }
 
     return technologyData;
