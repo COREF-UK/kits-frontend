@@ -7,7 +7,7 @@ import qs from "qs";
  */
 export function getStrapiURL(path = ""): string {
   return `${
-    process.env.NODE_ENV == 'production' ? process.env.NEXT_PUBLIC_STRAPI_API_URL : "http://kits-strapi.thalescoref.co.uk"
+    process.env.NODE_ENV == 'production' ? process.env.NEXT_PUBLIC_STRAPI_API_URL : "https://kits-strapi.coref.dev"
   }${path}`;
 }
 
@@ -31,6 +31,9 @@ export async function fetchAPI<T>(
     headers: {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`
+    },
+    next: {
+      revalidate: process.env.NODE_ENV === 'production' ? 3600 : 1
     },
     ...options,
   };

@@ -1,30 +1,31 @@
+'use client';
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export function Background() {
-  const [scrollY, setScrollY] = useState(0);
+export default function Background() {
+  // const [scrollY, setScrollY] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-      console.log('here')
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setScrollY(window.scrollY);
+  //   };
 
-    // just trigger this so that the initial state
-    // is updated as soon as the component is mounted
-    // related: https://stackoverflow.com/a/63408216
-    handleScroll();
+  //   // just trigger this so that the initial state
+  //   // is updated as soon as the component is mounted
+  //   // related: https://stackoverflow.com/a/63408216
+  //   handleScroll();
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
-    <div className={`fixed top-0 left-0 w-screen h-screen -z-50 rotate-[${scrollY}deg] transition-transform`}>
+    <div className={`fixed top-0 left-0 w-screen h-screen -z-50 rotate-[${0}deg] transition-transform`}>
       <Image
         className="absolute top-0 right-0 w-1/2"
         src="/alt/background-vector-1.svg"

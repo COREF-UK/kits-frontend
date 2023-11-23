@@ -1,6 +1,5 @@
-"use-client";
 import MultipleEntities from "@/app/_components/multipleEntities";
 
 export default function Themes() {
-  return <MultipleEntities path="themes" title="Themes"></MultipleEntities>;
+  return MultipleEntities({path: "themes", title: "Themes"});
 }
