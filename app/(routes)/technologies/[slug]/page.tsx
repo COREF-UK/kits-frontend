@@ -65,7 +65,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <div>
       <h1>{data.title}</h1>
-      <p>{data.description}</p>
+      <p className="opacity-50">{data.description}</p>
       <main>
         <ImplementationMatrix technologyData={data}></ImplementationMatrix>
       </main>

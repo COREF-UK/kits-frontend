@@ -26,12 +26,12 @@ const nextConfig = {
      */
   images: {
     loader: "default",
-    domains: ["kits-strapi.thalescoref.co.uk"],
+    domains: ["kits-strapi.coref.dev"],
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "kits-strapi.thalescoref.co.uk",
-        port: "80",
+        protocol: "https",
+        hostname: "kits-strapi.coref.dev",
+        port: "443",
         pathname: "/uploads/**",
       },
     ],

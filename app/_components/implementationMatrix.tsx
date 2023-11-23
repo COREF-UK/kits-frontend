@@ -1,10 +1,9 @@
 "use client";
 
-
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Variants, motion } from "framer-motion";
+import { AnimatePresence, Variants, motion } from "framer-motion";
 import {
   EntityType,
   ICellIdentifier,
@@ -40,6 +39,8 @@ export default function ImplementationMatrix({
   const [cellsToHighlight, setCellsToHighlight] = useState<
     ICellIdentifier[] | null
   >(null);
+
+  const [expandAll, setExpandAll] = useState<boolean>(false);
 
   const returnCellsUnder = (
     levelToSearch: IMaturityLevel,
@@ -86,8 +87,15 @@ export default function ImplementationMatrix({
   }, [fixedMaturity]);
 
   return (
-    <div className="mt-10">
-      <header className="w-full grid grid-cols-4 text-xl text-center font-bold mb-6 pl-[4.5rem] sticky top-6">
+    <div className="mt-10 relative">
+      <button
+        type="button"
+        onClick={() => setExpandAll(!expandAll)}
+        className="absolute left-2 -top-4 z-40 font-bold text-5xl"
+      >
+        {expandAll ? "-" : "+"}
+      </button>
+      <header className="w-full grid grid-cols-4 text-xl text-center font-bold mb-6 pl-[4.5rem] sticky top-6 z-30">
         {EntityType.map((heading) => (
           <div
             className="flex flex-row justify-center items-center gap-3 text-shadow shadow-black"
@@ -124,7 +132,7 @@ export default function ImplementationMatrix({
               }}
             >
               <motion.div
-                className="text-lg font-thin vertical-text rotate-180 w-10 mr-8 self-center"
+                className="text-lg font-thin vertical-text rotate-180 w-10 mr-8 self-center cursor-pointer"
                 animate={
                   cellsToHighlight === null
                     ? "default"
@@ -153,8 +161,8 @@ export default function ImplementationMatrix({
                             <Cell
                               key={entity.entity.id}
                               entityType={entityType}
-                              // link={`/${entityType}/${entity.entity.id}`}
                               entity={entity.entity}
+                              clickParent={expandAll}
                               highlighted={
                                 cellsToHighlight
                                   ?.some(
@@ -205,18 +213,28 @@ const cellVariants: Variants = {
       delay: i * 0.05,
     },
   }),
+  open: {
+    boxShadow: "0px 10px 20px 10px rgba(0,0,0,1);",
+  },
+  closed: {
+    boxShadow: "0px 0px 0px 0px rgba(0,0,0,0);",
+  },
 };
 
 function Cell({
   entity,
   entityType,
+  clickParent,
   highlighted,
 }: {
   entity: any;
   entityType: IEntityType;
+  clickParent: boolean;
   highlighted: string | null;
 }) {
-  const [clicked, setClicked] = useState<boolean>(false);
+  const [clicked, setClicked] = useState<boolean>(clickParent);
+
+  useEffect(() => setClicked(clickParent), [clickParent]);
 
   if (entity.attributes.name === "Everything Below") {
     return (
@@ -251,30 +269,43 @@ function Cell({
   };
 
   return (
-    // <Link href={link}>
     <motion.button
       type="button"
-      animate={highlighted ?? "default"}
+      animate={[highlighted ?? "default", clicked ? "open" : "closed"]}
       variants={cellVariants}
       custom={EntityType.indexOf(entityType as IEntityType)}
-      className={`w-full text-center text-xs font-extralight rounded-lg px-3 py-2 my-2 ${colorClass}`}
+      className={`w-full text-center text-xs font-light rounded-lg px-3 py-2 my-2 ${colorClass}`}
       onClick={(e) => {
-        e.stopPropagation();
-        if (highlighted || highlighted === null) {
+        if (highlighted === "true" || highlighted === null) {
+          e.stopPropagation();
           setClicked(!clicked);
         }
       }}
     >
       {entity.attributes.name}
-      <motion.p
-        animate={clicked ? "open" : "closed"}
-        initial='closed'
-        variants={descriptionVariants}
-        className="text-left text-gray-300"
-      >
-        {entity.attributes.description}
-      </motion.p>
+      <AnimatePresence>
+        {clicked && (
+          <motion.p
+            animate={clicked ? "open" : "closed"}
+            initial="closed"
+            variants={descriptionVariants}
+            exit="closed"
+            className="text-left text-gray-400 overflow-clip"
+          >
+            <br />
+            {entity.attributes.description}
+            <br />
+            <br />
+            <Link
+              onClick={(e) => e.stopPropagation()}
+              className="block ml-auto underline text-white"
+              href={`/${entityType}/${entity.id}`}
+            >
+              More Details
+            </Link>
+          </motion.p>
+        )}
+      </AnimatePresence>
     </motion.button>
-    // </Link>
   );
 }

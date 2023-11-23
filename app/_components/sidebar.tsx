@@ -69,7 +69,7 @@ export default function SideBar() {
       animate={isSideBarOpen ? "open" : "closed"}
       onAnimationStart={() => (isAnimating = true)}
       onAnimationComplete={() => (isAnimating = false)}
-      className={`fixed z-40 left-0 top-0  h-screen backdrop-blur-md flex flex-col items-start justify-start py-5 bg-blue-200 bg-opacity-10 outline-blue-100`}
+      className={`fixed z-50 left-0 top-0  h-screen backdrop-blur-md flex flex-col items-start justify-start py-5 bg-blue-200 bg-opacity-10 outline-blue-100`}
     >
       {/* Kits logo */}
       {isSideBarOpen && (
