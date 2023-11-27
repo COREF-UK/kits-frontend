@@ -7,8 +7,8 @@ import { AnimatePresence, Variants, motion } from "framer-motion";
 import {
   EntityType,
   ICellIdentifier,
-  IEntityType,
-  IMaturityLevel,
+  EntityTypeType,
+  TypeMaturityLevels,
   ITechnologyData,
   MaturityLevels,
 } from "../_lib/types";
@@ -33,7 +33,7 @@ export default function ImplementationMatrix({
 }: {
   technologyData: ITechnologyData;
 }) {
-  const [fixedMaturity, setFixedMaturity] = useState<IMaturityLevel | null>(
+  const [fixedMaturity, setFixedMaturity] = useState<TypeMaturityLevels | null>(
     null
   );
   const [cellsToHighlight, setCellsToHighlight] = useState<
@@ -43,10 +43,10 @@ export default function ImplementationMatrix({
   const [expandAll, setExpandAll] = useState<boolean>(false);
 
   const returnCellsUnder = (
-    levelToSearch: IMaturityLevel,
-    entityType: IEntityType
+    levelToSearch: TypeMaturityLevels,
+    entityType: EntityTypeType
   ): ICellIdentifier[] => {
-    const filteredCells = technologyData[levelToSearch].filter(
+    const filteredCells = technologyData[levelToSearch].entities.filter(
       (cell) => cell.type == entityType
     );
 
@@ -70,7 +70,7 @@ export default function ImplementationMatrix({
     return cells;
   };
 
-  const highlightMaturity = (maturity: IMaturityLevel) => {
+  const highlightMaturity = (maturity: TypeMaturityLevels) => {
     if (fixedMaturity) maturity = fixedMaturity;
 
     let newCells: ICellIdentifier[] = [];
@@ -87,103 +87,108 @@ export default function ImplementationMatrix({
   }, [fixedMaturity]);
 
   return (
-    <div className="mt-10 relative">
-      <button
-        type="button"
-        onClick={() => setExpandAll(!expandAll)}
-        className="absolute left-2 -top-4 z-40 font-bold text-5xl"
-      >
-        {expandAll ? "-" : "+"}
-      </button>
-      <header className="w-full grid grid-cols-4 text-xl text-center font-bold mb-6 pl-[4.5rem] sticky top-6 z-30">
-        {EntityType.map((heading) => (
-          <div
-            className="flex flex-row justify-center items-center gap-3 text-shadow shadow-black"
-            key={heading}
-          >
-            <Image
-              className="h-4"
-              src={`/alt/${heading}.svg`}
-              alt=""
-              width={20}
-              height={20}
-            ></Image>
-            {heading[0].toUpperCase() +
-              heading.slice(1, -1) +
-              (heading.includes("skills") ? "s" : "")}
-          </div>
-        ))}
-      </header>
-      {MaturityLevels.slice()
-        .reverse()
-        .map((level) => (
-          <div key={level}>
-            <hr className="opacity-30" />
-            <motion.section
-              className="flex flex-row flex-nowrap py-4"
-              // onMouseEnter={() => highlightMaturity(level)}
-              // onMouseLeave={() => !fixedMaturity && setCellsToHighlight(null)}
-              onClick={async () => {
-                if (fixedMaturity === level) {
-                  setFixedMaturity(null);
-                } else {
-                  setFixedMaturity(level);
-                }
-              }}
+    <div>
+      <p className="opacity-50">{technologyData.description}</p>
+      <div className="mt-10 relative">
+        <button
+          type="button"
+          onClick={() => setExpandAll(!expandAll)}
+          className="absolute left-2 -top-4 z-40 font-bold text-5xl"
+        >
+          {expandAll ? "-" : "+"}
+        </button>
+        <header className="w-full grid grid-cols-4 text-xl text-center font-bold mb-6 pl-[4.5rem] sticky top-6 z-30">
+          {EntityType.map((heading) => (
+            <div
+              className="flex flex-row justify-center items-center gap-3 text-shadow shadow-black"
+              key={heading}
             >
-              <motion.div
-                className="text-lg font-thin vertical-text rotate-180 w-10 mr-8 self-center cursor-pointer"
-                animate={
-                  cellsToHighlight === null
-                    ? "default"
-                    : (cellsToHighlight[0].maturityLevel === level).toString()
-                }
-                variants={maturityVariants}
+              <Image
+                className="h-4"
+                src={`/alt/${heading}.svg`}
+                alt=""
+                width={20}
+                height={20}
+              ></Image>
+              {heading[0].toUpperCase() +
+                heading.slice(1, -1) +
+                (heading.includes("skills") ? "s" : "")}
+            </div>
+          ))}
+        </header>
+        {MaturityLevels.slice()
+          .reverse()
+          .map((level) => (
+            <div key={level}>
+              <hr className="opacity-30" />
+              <motion.section
+                className="flex flex-row flex-nowrap py-4"
+                // onMouseEnter={() => highlightMaturity(level)}
+                // onMouseLeave={() => !fixedMaturity && setCellsToHighlight(null)}
+                onClick={async () => {
+                  if (fixedMaturity === level) {
+                    setFixedMaturity(null);
+                  } else {
+                    setFixedMaturity(level);
+                  }
+                }}
               >
-                {level}
-              </motion.div>
-              <div className="w-full">
-                {[false, true].map((belowFilter) => (
-                  <div
-                    className="w-full grid grid-cols-4 gap-4 first:mb-2"
-                    key={belowFilter.toString()}
-                  >
-                    {EntityType.map((entityType: IEntityType) => (
-                      <div className="flex flex-col h-full" key={entityType}>
-                        {technologyData[level as IMaturityLevel]
-                          .filter((el: any) => el.type === entityType)
-                          .filter((el: any) =>
-                            belowFilter
-                              ? el.entity.attributes.name === "Everything Below"
-                              : el.entity.attributes.name !== "Everything Below"
-                          )
-                          .map((entity: any) => (
-                            <Cell
-                              key={entity.entity.id}
-                              entityType={entityType}
-                              entity={entity.entity}
-                              clickParent={expandAll}
-                              highlighted={
-                                cellsToHighlight
-                                  ?.some(
-                                    (cell) =>
-                                      cell.entityType === entityType &&
-                                      cell.id === entity.entity.id &&
-                                      cell.maturityLevel === level
-                                  )
-                                  .toString() ?? null
-                              }
-                            ></Cell>
-                          ))}
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </motion.section>
-          </div>
-        ))}
-      <hr className="opacity-30" />
+                <motion.div
+                  className="text-lg font-thin vertical-text rotate-180 w-10 mr-8 self-center cursor-pointer"
+                  animate={
+                    cellsToHighlight === null
+                      ? "default"
+                      : (cellsToHighlight[0].maturityLevel === level).toString()
+                  }
+                  variants={maturityVariants}
+                >
+                  {level}
+                </motion.div>
+                <div className="w-full">
+                  {[false, true].map((belowFilter) => (
+                    <div
+                      className="w-full grid grid-cols-4 gap-4 first:mb-2"
+                      key={belowFilter.toString()}
+                    >
+                      {EntityType.map((entityType: EntityTypeType) => (
+                        <div className="flex flex-col h-full" key={entityType}>
+                          {technologyData[level as TypeMaturityLevels].entities
+                            .filter((el: any) => el.type === entityType)
+                            .filter((el: any) =>
+                              belowFilter
+                                ? el.entity.attributes.name ===
+                                  "Everything Below"
+                                : el.entity.attributes.name !==
+                                  "Everything Below"
+                            )
+                            .map((entity: any) => (
+                              <Cell
+                                key={entity.entity.id}
+                                entityType={entityType}
+                                entity={entity.entity}
+                                clickParent={expandAll}
+                                highlighted={
+                                  cellsToHighlight
+                                    ?.some(
+                                      (cell) =>
+                                        cell.entityType === entityType &&
+                                        cell.id === entity.entity.id &&
+                                        cell.maturityLevel === level
+                                    )
+                                    .toString() ?? null
+                                }
+                              ></Cell>
+                            ))}
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </motion.section>
+            </div>
+          ))}
+        <hr className="opacity-30" />
+      </div>
     </div>
   );
 }
@@ -228,7 +233,7 @@ function Cell({
   highlighted,
 }: {
   entity: any;
-  entityType: IEntityType;
+  entityType: EntityTypeType;
   clickParent: boolean;
   highlighted: string | null;
 }) {
@@ -242,7 +247,7 @@ function Cell({
         className="mx-auto w-fit sq text-center text-xs font-extralight px-3 py-2 my-2 bg-black bg-opacity-50 backdrop-blur-md text-white rounded-full flex flex-row justify-center items-center gap-1"
         animate={highlighted ?? "default"}
         variants={cellVariants}
-        custom={EntityType.indexOf(entityType as IEntityType)}
+        custom={EntityType.indexOf(entityType as EntityTypeType)}
       >
         <Image
           className="h-2 -rotate-90"
@@ -273,7 +278,7 @@ function Cell({
       type="button"
       animate={[highlighted ?? "default", clicked ? "open" : "closed"]}
       variants={cellVariants}
-      custom={EntityType.indexOf(entityType as IEntityType)}
+      custom={EntityType.indexOf(entityType as EntityTypeType)}
       className={`w-full text-center text-xs font-light rounded-lg px-3 py-2 my-2 ${colorClass}`}
       onClick={(e) => {
         if (highlighted === "true" || highlighted === null) {

@@ -1,9 +1,10 @@
+import ImplementationColumn from "@/app/_components/implementationColumn";
 import ImplementationMatrix from "@/app/_components/implementationMatrix";
 import { fetchAPI } from "@/app/_lib/api";
 import {
   EntityType,
-  IEntityType,
-  IMaturityLevel,
+  EntityTypeType,
+  TypeMaturityLevels,
   ITechnologyData,
 } from "@/app/_lib/types";
 
@@ -26,10 +27,11 @@ async function fetchData(slug: string) {
     const technologyData: ITechnologyData = {
       title: response.data.attributes.name,
       description: response.data.attributes.description,
-      Basic: [],
-      Advanced: [],
-      "World-Class": [],
-      Future: [],
+      theme: response.data.attributes.theme.data.attributes.name,
+      Basic: { description: "", entities: [] },
+      Advanced: { description: "", entities: [] },
+      "World-Class": { description: "", entities: [] },
+      Future: { description: "", entities: [] },
     };
 
     for (let maturityLevel of response.data.attributes.maturity_levels.data) {
@@ -38,12 +40,16 @@ async function fetchData(slug: string) {
         urlParamsObject
       );
 
-      EntityType.forEach((entityType: IEntityType) => {
+      technologyData[
+        maturityLevel.attributes.level as TypeMaturityLevels
+      ].description = maturityLevelResponse.data.attributes.description;
+
+      EntityType.forEach((entityType: EntityTypeType) => {
         maturityLevelResponse.data.attributes[entityType].data.forEach(
           (entity: any) => {
             technologyData[
-              maturityLevel.attributes.level as IMaturityLevel
-            ].push({
+              maturityLevel.attributes.level as TypeMaturityLevels
+            ].entities.push({
               type: entityType,
               entity: entity,
             });
@@ -65,9 +71,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <div>
       <h1>{data.title}</h1>
-      <p className="opacity-50">{data.description}</p>
       <main>
-        <ImplementationMatrix technologyData={data}></ImplementationMatrix>
+        {data.theme === "Connectivity" && (
+          <ImplementationMatrix technologyData={data}></ImplementationMatrix>
+        )}
+        {data.theme !== "Connectivity" && (
+          <ImplementationColumn technologyData={data}></ImplementationColumn>
+        )}
       </main>
     </div>
   );

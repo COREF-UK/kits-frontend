@@ -10,6 +10,14 @@
   h3 {
     @apply text-lg font-bold;
   }
+
+  .implementation-column tr:first-child td:first-child {
+    @apply rounded-b-xl rounded-l-none;
+  }
+
+  .implementation-column tr:last-child td:first-child {
+    @apply rounded-t-xl rounded-l-none;
+  }
 }
 
 .background-image {
@@ -21,8 +29,8 @@
 }
 
 .invisible-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .vertical-text {
@@ -31,20 +39,21 @@
 }
 
 .hardware-cell {
-  background-color: #192C3B;
+  background-color: #192c3b;
 }
 .software-cell {
-  background-color: #29475F;
+  background-color: #29475f;
 }
 .infrastructure-cell {
-  background-color: #3E6B8E;
+  background-color: #3e6b8e;
 }
 .skill-cell {
-  background-color: #5B8EB7;
+  background-color: #5b8eb7;
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 1;
   }
@@ -54,6 +63,7 @@
   }
 }
 
-.react-flow__handle-bottom, .react-flow__handle-top {
+.react-flow__handle-bottom,
+.react-flow__handle-top {
   opacity: 0;
 }

@@ -4,7 +4,7 @@ export const EntityType = [
   "infrastructures",
   "skills",
 ] as const;
-export type IEntityType = (typeof EntityType)[number];
+export type EntityTypeType = (typeof EntityType)[number];
 
 export const MaturityLevels = [
   "Basic",
@@ -12,24 +12,30 @@ export const MaturityLevels = [
   "World-Class",
   "Future",
 ] as const;
-export type IMaturityLevel = (typeof MaturityLevels)[number];
+export type TypeMaturityLevels = (typeof MaturityLevels)[number];
 
 export interface ITechnologyEntity {
+  type: EntityTypeType;
   entity: any;
-  type: IEntityType;
+}
+
+export interface IMaturityLevel {
+  description: string;
+  entities: ITechnologyEntity[];
 }
 
 export interface ITechnologyData {
   title: string;
   description: string;
-  Basic: ITechnologyEntity[];
-  Advanced: ITechnologyEntity[];
-  "World-Class": ITechnologyEntity[];
-  Future: ITechnologyEntity[];
+  theme: string;
+  Basic: IMaturityLevel;
+  Advanced: IMaturityLevel;
+  "World-Class": IMaturityLevel;
+  Future: IMaturityLevel;
 }
 
 export interface ICellIdentifier {
   id: number;
-  entityType: IEntityType;
-  maturityLevel: IMaturityLevel;
+  entityType: EntityTypeType;
+  maturityLevel: TypeMaturityLevels;
 }
