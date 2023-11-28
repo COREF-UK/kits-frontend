@@ -18,6 +18,18 @@
   .implementation-column tr:last-child td:first-child {
     @apply rounded-t-xl rounded-l-none;
   }
+
+  .markdown p {
+    @apply mb-2 text-gray-400
+  }
+
+  .markdown p:last-child {
+    @apply mb-0
+  }
+
+  .markdown img {
+    @apply my-4 rounded-md
+  }
 }
 
 .background-image {

@@ -77,7 +77,7 @@ export default function NavTheme({
               width: isSideBarOpen ? "18.5rem" : "2.5rem",
             }}
             exit={{ scale: 0.5, opacity: 0 }}
-            className="absolute top-3 left-3 h-10 rounded-lg bg-opacity-10 backdrop-blur-sm bg-blue-700 z-50"
+            className="absolute top-3 left-3 h-10 rounded-lg bg-opacity-10 backdrop-blur-sm bg-blue-700"
           ></motion.div>
         )}
       </AnimatePresence>
@@ -130,7 +130,7 @@ export default function NavTheme({
                     <motion.li
                       key={tech.id}
                       variants={itemVariants}
-                      className="mt-2 text-gray-400 first:mt-6"
+                      className="mt-2 text-gray-500 first:mt-6"
                       style={
                         pathname === `/technologies/${tech.id}`
                           ? { color: "white" }

@@ -1,4 +1,5 @@
 import { EntityType, ITechnologyData, MaturityLevels } from "../_lib/types";
+import Markdown from "./markdown";
 
 export default function ImplementationColumn({
   technologyData,
@@ -6,10 +7,11 @@ export default function ImplementationColumn({
   technologyData: ITechnologyData;
 }) {
   return (
-    <div className="flex flex-col xl:flex-row justify-between relative gap-10 mt-8">
-      <p className="opacity-50 min-w-[35%]">{technologyData.description}</p>
+    <div className="flex flex-col xl:flex-row justify-between relative gap-10 mt-4">
+      <div className="min-w-[35%]">
+        <Markdown source={technologyData.description}></Markdown>
+      </div>
       <table className="border-separate implementation-column min-w-[60%]">
-        {/* <caption className="mb-2">Maturity</caption> */}
         <tbody>
           {MaturityLevels.slice()
             .reverse()
@@ -25,8 +27,10 @@ export default function ImplementationColumn({
                 >
                   {level}
                 </td>
-                <td className="opacity-50 p-4 border-2 border-slate-600 font-light rounded-r-xl backdrop-blur-xl">
-                  {technologyData[level].description}
+                <td className="p-4 border-2 border-slate-600 font-light rounded-r-xl backdrop-blur-xl text-base">
+                  <Markdown
+                    source={technologyData[level].description}
+                  ></Markdown>
                 </td>
               </tr>
             ))}

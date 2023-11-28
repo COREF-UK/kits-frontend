@@ -12,6 +12,7 @@ import {
   ITechnologyData,
   MaturityLevels,
 } from "../_lib/types";
+import Markdown from "./markdown";
 
 const maturityVariants: Variants = {
   true: {
@@ -87,8 +88,10 @@ export default function ImplementationMatrix({
   }, [fixedMaturity]);
 
   return (
-    <div>
-      <p className="opacity-50">{technologyData.description}</p>
+    <div className="mt-4">
+      <p className="opacity-50">
+        <Markdown source={technologyData.description}></Markdown>
+      </p>
       <div className="mt-10 relative">
         <button
           type="button"
@@ -298,7 +301,7 @@ function Cell({
             className="text-left text-gray-400 overflow-clip"
           >
             <br />
-            {entity.attributes.description}
+            <Markdown source={entity.attributes.description}></Markdown>
             <br />
             <br />
             <Link

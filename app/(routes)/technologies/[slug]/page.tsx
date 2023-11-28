@@ -1,3 +1,4 @@
+import GlossaryTooltips from "@/app/_components/glossaryTooltips";
 import ImplementationColumn from "@/app/_components/implementationColumn";
 import ImplementationMatrix from "@/app/_components/implementationMatrix";
 import { fetchAPI } from "@/app/_lib/api";

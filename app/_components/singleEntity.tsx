@@ -2,6 +2,7 @@ import { fetchAPI } from "@/app/_lib/api";
 import Image from "next/image";
 import { getStrapiMedia } from "@/app/_lib/media";
 import ListItem from "./listItem";
+import Markdown from "./markdown";
 
 var GeoPattern = require("geopattern");
 
@@ -46,7 +47,7 @@ export default async function SingleEntity({
   const data = await fetchData(path, slug);
   const pattern = GeoPattern.generate(data?.attributes?.name);
 
-  if (data === undefined) return <h1>Error Fetching Data</h1>
+  if (data === undefined) return <h1>Error Fetching Data</h1>;
 
   return (
     <div>
@@ -55,7 +56,7 @@ export default async function SingleEntity({
           <div>
             <h1>{data.attributes.name}</h1>
             <p className="opacity-60 leading-5 my-2 max-w-5xl">
-              {data.attributes.description}
+              <Markdown source={data.attributes.description}></Markdown>
             </p>
           </div>
 

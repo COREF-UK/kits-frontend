@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 
 import SideBar from "../_components/sidebar";
 import Background from "../_components/background";
+import GlossaryTooltips from "../_components/glossaryTooltips";
 
 const exo2 = Exo_2({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className={exo2.className + " min-h-screen"}>
         <SideBar></SideBar>
         <Background></Background>
+        <GlossaryTooltips></GlossaryTooltips>
         <div className="ml-16 p-4 md:p-8 h-full">
             {children}
         </div>
