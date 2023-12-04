@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 export default function Markdown({ source }: { source: string }) {
   return (
     <ReactMarkdown
-      className="markdown"
+      className="markdown markdown-invert text-gray-400 markdown-img:rounded-lg"
       components={{
         a(props) {
           const { children, node, title, ...rest } = props;

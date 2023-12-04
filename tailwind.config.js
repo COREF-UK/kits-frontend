@@ -45,6 +45,9 @@ module.exports = {
   },
   plugins: [
     require("tailwindcss-animate"),
+    require('@tailwindcss/typography')({
+      className: 'markdown',
+    }),
     plugin(function ({ matchUtilities, theme }) {
       matchUtilities(
         {

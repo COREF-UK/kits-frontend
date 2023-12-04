@@ -54,10 +54,8 @@ export default async function SingleEntity({
       <main>
         <section className="flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-28">
           <div>
-            <h1>{data.attributes.name}</h1>
-            <p className="opacity-60 leading-5 my-2 max-w-5xl">
-              <Markdown source={data.attributes.description}></Markdown>
-            </p>
+            <h1 className="mb-2">{data.attributes.name}</h1>
+            <Markdown source={data.attributes.description}></Markdown>
           </div>
 
           <Image
