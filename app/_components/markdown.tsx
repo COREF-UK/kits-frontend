@@ -9,7 +9,7 @@ export default function Markdown({
 }) {
   return (
     <ReactMarkdown
-      className={`markdown markdown-invert ${
+      className={`max-w-max markdown markdown-invert ${
         size ? `markdown-${size}` : ""
       } text-gray-400 markdown-img:rounded-lg `}
       components={{
