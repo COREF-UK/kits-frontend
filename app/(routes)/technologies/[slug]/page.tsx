@@ -73,10 +73,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
     <div>
       <h1>{data.title}</h1>
       <main>
-        {data.theme === "Connectivity" && (
+        {data.title === "Data Management" && (
           <ImplementationMatrix technologyData={data}></ImplementationMatrix>
         )}
-        {data.theme !== "Connectivity" && (
+        {data.title !== "Data Management" && (
           <ImplementationColumn technologyData={data}></ImplementationColumn>
         )}
       </main>
