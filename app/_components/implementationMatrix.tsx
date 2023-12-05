@@ -298,15 +298,14 @@ function Cell({
             initial="closed"
             variants={descriptionVariants}
             exit="closed"
-            className="text-left text-gray-400 overflow-clip"
+            className="text-left overflow-clip"
           >
             <br />
-            <Markdown source={entity.attributes.description}></Markdown>
-            <br />
+            <Markdown size="sm" source={entity.attributes.synopsis}></Markdown>
             <br />
             <Link
               onClick={(e) => e.stopPropagation()}
-              className="block ml-auto underline text-white"
+              className="block ml-auto underline text-white text-center"
               href={`/${entityType}/${entity.id}`}
             >
               More Details
