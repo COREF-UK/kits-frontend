@@ -5,13 +5,12 @@ export default function Markdown({
   size,
 }: {
   source: string;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "lg" | "xl" | "2xl";
 }) {
+  const markdownClass = `max-w-max markdown markdown-${size ?? 'base'} markdown-invert text-gray-400 markdown-img:rounded-lg`;
   return (
     <ReactMarkdown
-      className={`max-w-max markdown markdown-invert ${
-        size ? `markdown-${size}` : ""
-      } text-gray-400 markdown-img:rounded-lg `}
+      className={markdownClass}
       components={{
         a(props) {
           const { children, node, title, ...rest } = props;

@@ -89,9 +89,9 @@ export default function ImplementationMatrix({
 
   return (
     <div className="mt-4">
-      <p className="opacity-50">
+      <div className="opacity-50">
         <Markdown source={technologyData.description}></Markdown>
-      </p>
+      </div>
       <div className="mt-10 relative">
         <button
           type="button"
