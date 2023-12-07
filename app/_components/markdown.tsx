@@ -15,10 +15,10 @@ export default function Markdown({
         a(props) {
           const { children, node, title, ...rest } = props;
           if (title) {
-            const match = /glossary-(\d+)/.exec(title || "");
+            const match = /glossary-(\d+)/.exec(title);
             if (match) {
               return (
-                <span data-tooltip-id={title} {...rest} className="italic">
+                <span data-tooltip-id={title} {...rest} className="italic whitespace-nowrap">
                   {children}
                 </span>
               );
