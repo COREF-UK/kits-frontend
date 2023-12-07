@@ -25,7 +25,7 @@ export default function Markdown({
             }
           }
 
-          return <span {...rest}>{children}</span>;
+          return <a {...rest}>{children}</a>;
         },
       }}
     >
