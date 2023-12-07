@@ -40,7 +40,7 @@ export default function GlossaryTooltips() {
   return data.map((tooltip: any) => (
     <Tooltip
       key={tooltip.id}
-      className="max-w-[300px] z-40 bg-opacity-10 backdrop-blur-sm p-2 rounded-lg"
+      className="max-w-[300px] z-50 bg-opacity-10 backdrop-blur-sm p-2 rounded-lg"
       id={`glossary-${tooltip.id.toString()}`}
       place="bottom"
       content={tooltip.attributes.content}
