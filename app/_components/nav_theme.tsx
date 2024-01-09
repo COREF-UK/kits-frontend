@@ -148,7 +148,7 @@ export default function NavTheme({
           <motion.div
             initial={{ rotate: 90 }}
             animate={isExpanded ? { rotate: 270 } : { rotate: 90 }}
-            className="z-50 mr-5 mt-1"
+            className="z-50 mr-5 mt-1 pointer-events-none"
           >
             <Image
               className="w-full"
