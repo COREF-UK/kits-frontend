@@ -28,8 +28,8 @@ const maturityVariants: Variants = {
   default: {
     filter: "brightness(1)",
     fontWeight: "100",
-    scale: [-1, -0.92, -1],
-    transition: { repeat: Infinity, duration: 2, repeatType: "mirror" },
+    scale: [-1, -0.95, -1],
+    transition: { repeat: Infinity, duration: 3, repeatType: "mirror" },
   },
 };
 
@@ -195,6 +195,7 @@ export default function ImplementationMatrix({
             </div>
           ))}
         <hr className="opacity-30" />
+        <p className="text-center italic text-small opacity-30 mt-4 ">click maturity level to highlight</p>
       </div>
     </div>
   );

@@ -9,8 +9,8 @@ export default function Markdown({
   size?: "sm" | "lg" | "xl" | "2xl";
   isLightMode?: boolean;
 }) {
-  const markdownClass = `max-w-max markdown ${"markdown-" + size ?? "base"} ${
-    isLightMode ?? false ? "" : "markdown-invert text-gray-400"
+  const markdownClass = `max-w-max markdown markdown-sm ${"markdown-" + size ?? "base"} ${
+    isLightMode ?? false ? "" : "markdown-invert text-gray-300"
   } markdown-img:rounded-lg`;
   return (
     <ReactMarkdown
