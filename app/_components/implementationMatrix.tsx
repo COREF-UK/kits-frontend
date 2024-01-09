@@ -18,14 +18,18 @@ const maturityVariants: Variants = {
   true: {
     filter: "brightness(1.1)",
     fontWeight: "400",
+    scale: -1,
   },
   false: {
     filter: "brightness(0.2)",
     fontWeight: "100",
+    scale: -0.92,
   },
   default: {
     filter: "brightness(1)",
     fontWeight: "100",
+    scale: [-1, -0.92, -1],
+    transition: { repeat: Infinity, duration: 2, repeatType: "mirror" },
   },
 };
 

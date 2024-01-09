@@ -19,9 +19,9 @@ export default function Page() {
           height="1080"
           alt="COREF"
         ></Image>
-        <Link href="/themes">
+        {/* <Link href="/themes"> */}
         <Button title="EXPLORE"></Button>
-        </Link>
+        {/* </Link> */}
       </div>
 
       <Image

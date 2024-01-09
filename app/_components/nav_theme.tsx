@@ -83,17 +83,18 @@ export default function NavTheme({
       </AnimatePresence>
 
       <div className="relative flex flex-row items-start justify-start">
-        {/* Link */}
-        <Link
-          href={`/themes/${index + 1}`}
+        <button
+          type="button"
           className="absolute top-2 left-3 z-40"
-          title={theme}
+          onClick={() => {
+            setExpanded(!isExpanded);
+          }}
         >
           <div
             style={{ width: isSideBarOpen ? "18.5rem" : "2.5rem" }}
             className="h-10"
           ></div>
-        </Link>
+        </button>
 
         {/* Icon */}
         <Image
@@ -144,13 +145,9 @@ export default function NavTheme({
               )}
             </AnimatePresence>
           </div>
-          <motion.button
-            type="button"
+          <motion.div
             initial={{ rotate: 90 }}
             animate={isExpanded ? { rotate: 270 } : { rotate: 90 }}
-            onClick={() => {
-              setExpanded(!isExpanded);
-            }}
             className="z-50 mr-5 mt-1"
           >
             <Image
@@ -160,7 +157,7 @@ export default function NavTheme({
               height="24"
               alt={isExpanded ? "Close" : "Open"}
             ></Image>
-          </motion.button>
+          </motion.div>
         </motion.div>
       </div>
     </div>
