@@ -42,6 +42,11 @@ const initialNodes: Node[] = [
     data: { label: 'Analytics' },
     position,
   },
+  {
+    id: '5',
+    data: { label: 'Edge Device' },
+    position,
+  }
 ];
 
 const initialEdges: Edge[] = [
