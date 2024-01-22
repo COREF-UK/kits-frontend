@@ -36,7 +36,6 @@ export default function GlossaryTooltips() {
   }, []);
 
   if (!data) return <div></div>;
-  console.log(data);
   return data.map((tooltip: any) => (
     <Tooltip
       key={tooltip.id}

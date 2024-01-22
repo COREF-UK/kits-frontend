@@ -1,6 +1,8 @@
 import GlossaryTooltips from "@/app/_components/glossaryTooltips";
 import ImplementationColumn from "@/app/_components/implementationColumn";
 import ImplementationMatrix from "@/app/_components/implementationMatrix";
+import ArchitectureDiagram from "@/app/_components/architectureDiagram";
+import { initialEdges, initialNodes } from "@/app/_lib/connectivity_architecture";
 import { fetchAPI } from "@/app/_lib/api";
 import {
   EntityType,
@@ -74,7 +76,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <h1>{data.title}</h1>
       <main>
         {data.title === "Data Management" && (
-          <ImplementationMatrix technologyData={data}></ImplementationMatrix>
+          <>
+            <ImplementationMatrix technologyData={data}></ImplementationMatrix>
+            <ArchitectureDiagram
+              initialNodes={initialNodes}
+              initialEdges={initialEdges}
+            ></ArchitectureDiagram>
+          </>
         )}
         {data.title !== "Data Management" && (
           <ImplementationColumn technologyData={data}></ImplementationColumn>
